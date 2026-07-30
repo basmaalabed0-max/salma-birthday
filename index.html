@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,6 +24,7 @@ body {
   border-radius: 25px;
   background: rgba(255,255,255,0.08);
   box-shadow: 0 0 30px rgba(255,255,255,0.2);
+  max-width: 500px;
 }
 
 h1 {
@@ -61,7 +63,9 @@ button:hover {
 <button onclick="openGift()">افتحي المفاجأة 🎀</button>
 </div>
 
+
 <script>
+
 function openGift() {
   document.querySelector(".box").innerHTML = `
     <h1>🎉 أول مرحلة 🎉</h1>
@@ -72,33 +76,41 @@ function openGift() {
   `;
 }
 
+
 function question1() {
   document.querySelector(".box").innerHTML = `
     <h1>❓ السؤال الأول</h1>
     <p>مين أكثر وحدة بتحبك؟ 🤭</p>
 
-    <button onclick="correct()">بسمة 😌❤️</button><br><br>
+    <button onclick="correct()">بسمة 😌❤️</button>
+    <br><br>
     <button onclick="wrong()">شخص ثاني 🙄</button>
   `;
 }
+
 
 function correct() {
   document.querySelector(".box").innerHTML = `
     <h1>😂 عرفتي الصح!</h1>
     <p>أكيد الجواب بسمة 💛</p>
+
     <button onclick="nextStep()">كملي ➜</button>
   `;
 }
 
+
 function wrong() {
   alert("غلط 😂 جربي مرة ثانية!");
 }
+
 
 function nextStep() {
   document.querySelector(".box").innerHTML = `
     <h1>🎁 ولسه المفاجآت ما خلصت...</h1>
     <p>في أشياء أحلى بانتظارك 😍✨</p>
   `;
+}
+
 </script>
 
 </body>
