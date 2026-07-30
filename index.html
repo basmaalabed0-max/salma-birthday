@@ -62,10 +62,43 @@ button:hover {
 </div>
 
 <script>
-function openGift(){
- alert("لسه البداية يا سلومي 😍✨ المفاجأة الكبرى جاية!");
+<script>
+function openGift() {
+  document.querySelector(".box").innerHTML = `
+    <h1>🎉 أول مرحلة 🎉</h1>
+    <p>قبل ما توصلي للمفاجأة الكبرى...</p>
+    <p>لازم نلعب لعبة صغيرة 😏💛</p>
+
+    <button onclick="question1()">يلا نبدأ 🚀</button>
+  `;
+}
+
+function question1() {
+  document.querySelector(".box").innerHTML = `
+    <h1>❓ السؤال الأول</h1>
+    <p>مين أكثر وحدة بتحبك؟ 🤭</p>
+
+    <button onclick="correct()">بسمة 😌❤️</button><br><br>
+    <button onclick="wrong()">شخص ثاني 🙄</button>
+  `;
+}
+
+function correct() {
+  document.querySelector(".box").innerHTML = `
+    <h1>😂 عرفتي الصح!</h1>
+    <p>أكيد الجواب بسمة 💛</p>
+    <button onclick="nextStep()">كملي ➜</button>
+  `;
+}
+
+function wrong() {
+  alert("غلط 😂 جربي مرة ثانية!");
+}
+
+function nextStep() {
+  document.querySelector(".box").innerHTML = `
+    <h1>🎁 ولسه المفاجآت ما خلصت...</h1>
+    <p>في أشياء أحلى بانتظارك 😍✨</p>
+  `;
 }
 </script>
-
-</body>
-</html>
