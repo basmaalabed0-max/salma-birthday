@@ -6,42 +6,66 @@
 <title>عيد ميلاد سلمى 🎂</title>
 
 <style>
-body{
-margin:0;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-background:linear-gradient(135deg,#ff9ecf,#ffd6e8);
-font-family:Arial,sans-serif;
-text-align:center;
-color:white;
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #050505, #2b1b3d);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
 }
 
-h1{
-font-size:40px;
+.box {
+  padding: 35px;
+  border-radius: 25px;
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 0 30px rgba(255,255,255,0.2);
 }
 
-button{
-padding:15px 35px;
-font-size:20px;
-border:none;
-border-radius:30px;
-cursor:pointer;
-background:white;
-color:#ff4f8b;
-font-weight:bold;
+h1 {
+  font-size: 38px;
+}
+
+p {
+  font-size: 22px;
+}
+
+button {
+  margin-top: 25px;
+  padding: 15px 35px;
+  border: none;
+  border-radius: 30px;
+  background: #d4af37;
+  color: black;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  transform: scale(1.05);
 }
 </style>
+
 </head>
 
 <body>
 
-<div>
-<h1>🎉 أهلاً يا سلمى 🎉</h1>
-<p>هاي بداية مفاجأتك ❤️</p>
-<button>ابدئي الرحلة ✨</button>
+<div class="box">
+<h1>سلومي 💛</h1>
+<p>في مفاجأة بانتظارك ✨</p>
+<p>جاهزة للمتعة؟ 🎁</p>
+
+<button onclick="openGift()">افتحي المفاجأة 🎀</button>
 </div>
+
+<script>
+function openGift(){
+ alert("لسه البداية يا سلومي 😍✨ المفاجأة الكبرى جاية!");
+}
+</script>
 
 </body>
 </html>
