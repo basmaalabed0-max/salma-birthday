@@ -4,86 +4,91 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>عيد ميلاد سلمى 🎂</title>
 
 <style>
+
 body {
-  margin: 0;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #050505, #2b1b3d);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: Arial, sans-serif;
-  color: white;
-  text-align: center;
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(135deg,#050505,#2b1b3d);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial,sans-serif;
+  color:white;
+  text-align:center;
 }
 
 .box {
-  padding: 35px;
-  border-radius: 25px;
-  background: rgba(255,255,255,0.08);
-  box-shadow: 0 0 30px rgba(255,255,255,0.2);
-  max-width: 500px;
+  padding:35px;
+  border-radius:25px;
+  background:rgba(255,255,255,0.08);
+  box-shadow:0 0 30px rgba(255,255,255,0.2);
+  max-width:500px;
+  width:90%;
 }
 
 h1 {
-  font-size: 38px;
+  font-size:36px;
 }
 
 p {
-  font-size: 22px;
+  font-size:21px;
+  line-height:1.8;
 }
 
 button {
-  margin-top: 20px;
-  padding: 15px 35px;
-  border: none;
-  border-radius: 30px;
-  background: #d4af37;
-  color: black;
-  font-size: 20px;
-  cursor: pointer;
+  margin-top:20px;
+  padding:15px 35px;
+  border:none;
+  border-radius:30px;
+  background:#d4af37;
+  color:black;
+  font-size:20px;
+  cursor:pointer;
 }
 
 button:hover {
-  transform: scale(1.05);
+  transform:scale(1.05);
 }
 
 .gifts {
- display:flex;
- justify-content:center;
- gap:15px;
- margin-top:25px;
+  display:flex;
+  justify-content:center;
+  gap:20px;
 }
 
 .gift {
- font-size:50px;
- cursor:pointer;
- transition:.3s;
+  font-size:55px;
+  cursor:pointer;
 }
 
-.gift:hover {
- transform:scale(1.2);
+img, video {
+  width:100%;
+  border-radius:20px;
+  margin-top:20px;
 }
 
-img {
- width:100%;
- border-radius:20px;
- margin-top:20px;
+.heart {
+  font-size:45px;
+  animation:heart 1s infinite;
 }
 
-video {
- width:100%;
- border-radius:20px;
- margin-top:20px;
+@keyframes heart {
+  50% {
+    transform:scale(1.4);
+  }
 }
 
 </style>
 
 </head>
 
+
 <body>
+
 
 <div class="box" id="box">
 
@@ -93,22 +98,27 @@ video {
 
 <p>جاهزة للمتعة؟ 🎁</p>
 
-<button onclick="openGift()">افتحي المفاجأة 🎀</button>
+<button onclick="start()">افتحي المفاجأة 🎀</button>
 
 </div>
 
 
 <script>
 
-function openGift(){
+let box=document.getElementById("box");
+
+
+function start(){
 
 box.innerHTML=`
 
 <h1>🎉 أول مرحلة 🎉</h1>
 
-<p>قبل ما توصلي للمفاجأة الكبرى...</p>
-
-<p>لازم نلعب لعبة صغيرة 😏💛</p>
+<p>
+قبل ما توصلي للمفاجأة الكبرى...
+<br>
+لازم نلعب لعبة صغيرة 😏💜
+</p>
 
 <button onclick="question1()">يلا نبدأ 🚀</button>
 
@@ -117,23 +127,71 @@ box.innerHTML=`
 }
 
 
+
 function question1(){
 
 box.innerHTML=`
 
 <h1>❓ السؤال الأول</h1>
 
-<p>مين أكثر وحدة بتحبك؟ 🤭</p>
+<p>
+لو رجع فينا الزمن...<br>
+بتختاريني أكون صاحبتك مرة ثانية؟ 💜
+</p>
 
-<button onclick="correct()">بسمة 😌❤️</button>
+<button onclick="correct1()">❤️ أكيد</button>
 
 <br><br>
 
-<button onclick="wrong()">شخص ثاني 🙄</button>
+<button onclick="wrong()">لا 😂</button>
 
 `;
 
 }
+
+
+
+function correct1(){
+
+box.innerHTML=`
+
+<div class="heart">❤️❤️❤️</div>
+
+<h1>🥰</h1>
+
+<p>
+يلا نكمل المفاجأة ✨
+</p>
+
+<button onclick="question2()">نكمل ➜</button>
+
+`;
+
+}
+
+
+
+function question2(){
+
+box.innerHTML=`
+
+<h1>❓ السؤال الثاني</h1>
+
+<p>
+تتذكري وعدنا؟ 🤭💜<br>
+بنضل سوا لحد...
+</p>
+
+<button onclick="boxes()">🫂 90 سنة 💜</button>
+
+<br><br>
+
+<button onclick="wrong()">😂 يوم واحد بس</button>
+
+`;
+
+}
+
 
 
 function wrong(){
@@ -143,28 +201,13 @@ alert("غلط 😂 جربي مرة ثانية!");
 }
 
 
-function correct(){
+function boxes(){
 
 box.innerHTML=`
 
-<h1>😂 عرفتي الصح!</h1>
+<h1>🎁 صناديق المفاجأة 🎀</h1>
 
-<p>أكيد الجواب بسمة 💛</p>
-
-<button onclick="giftBoxes()">كملي ➜</button>
-
-`;
-
-}
-
-
-function giftBoxes(){
-
-box.innerHTML=`
-
-<h1>🎁 اختاري هديتك</h1>
-
-<p>كل بوكس فيه مفاجأة صغيرة ✨</p>
+<p>اختاري صندوقك 💜</p>
 
 <div class="gifts">
 
@@ -178,60 +221,64 @@ box.innerHTML=`
 
 `;
 
-}
-
-
-
-
-function gift1(){
+}function gift1(){
 
 box.innerHTML=`
 
-<h1>💛 هدية رقم 1</h1>
+<h1>🎁 الصندوق الأول 💜</h1>
 
 <p>
-وجودك بحياتي من أجمل الأشياء، وضحكتك دايمًا بتفرق معي ✨
+وجودك بحياتي صدفة، بس من أحلى الصدف، انتي نعمة من ربنا بحمد الله عليها دايمًا 💜🫂
 </p>
 
-<button onclick="giftBoxes()">رجوع 🎁</button>
+<button onclick="boxes()">رجوع 🎁</button>
 
 `;
 
 }
+
 
 
 function gift2(){
 
 box.innerHTML=`
 
-<h1>🌸 هدية رقم 2</h1>
+<h1>🎁 الصندوق الثاني 💛</h1>
 
 <p>
-ذكرياتنا الحلوة كثير، ولسه الجاي أحلى إن شاء الله 💛
+وجودك معوضني عن كل شيء
+<br>
+وروحي فيك حرفيًا
+<br>
+مستعدة أعطيكي عيني قبل قلبي ما أنحرم منك 🫂
 </p>
 
-<button onclick="giftBoxes()">رجوع 🎁</button>
+<button onclick="boxes()">رجوع 🎁</button>
 
 `;
 
 }
+
 
 
 function gift3(){
 
 box.innerHTML=`
 
-<h1>💌 هدية رقم 3</h1>
+<h1>🎁 الصندوق الثالث ✨</h1>
 
 <p>
-سلومي... في رسالة خاصة إلك بانتظارك ❤️
+عارفة إني بحبك؟ انتي صاحبتي وعمري
+<br>
+بتطمن بوجودك وانتي معي ما بكون بحاجة حدا 💜
 </p>
 
-<button onclick="message()">افتحي الرسالة 💌</button>
+<button onclick="message()">الرسالة الكبيرة 💌</button>
 
 `;
 
 }
+
 
 
 function message(){
@@ -241,51 +288,76 @@ box.innerHTML=`
 <h1>💌 إلى سلومي</h1>
 
 <p>
-كل عام وإنتِ بخير يا أحلى سلومي 🎂💛
+سلومي القلب والغلى كلو اغلى من روحي بحبك جدا ربي ما يحرمني منك
 <br><br>
-وجودك بحياتي نعمة، وإن شاء الله أيامك كلها فرح وضحكة وسعادة.
+كنت بتمنى بهاليوم اكون معك بس الظروف بتمنع وانتي عارفة
 <br><br>
-هاي المفاجأة بسيطة بس من القلب ❤️
+حبيت اعملك اشي يكون حلو بتمنى يعجبك
+<br><br>
+كوني عارفة شو ماصار هضل احبك لاخر يوم بحياتي
+<br><br>
+قلبي وعيوني وروحي وانا بدونك ولا اشي
+<br><br>
+انتي احلا اشي صار بعمري واحلا نعمة من ربنا
+<br><br>
+الله ما يحرمني منك
+<br><br>
+بتمنالك عيد ميلاد سعيد كل عام وانتي بألف خير قلب
+<br><br>
+يارب سنينك الجاي تكون احلا ومتل ما بتتمني
+<br><br>
+ويبعتلك كل الخير والايام الحلوة
+<br><br>
+لنا لقاء ب اذن الله
+<br><br>
+بحبك العمر كلو 🫂💜
 </p>
+
 
 <img src="1781566303207.png">
 
-<button onclick="finalSurprise()">المفاجأة الأخيرة ✨</button>
+
+<button onclick="finalVideo()">
+الخاتمة 🎂
+</button>
+
 
 `;
 
 }
 
 
-function finalSurprise(){
+
+function finalVideo(){
 
 box.innerHTML=`
 
-<h1>🎉 المفاجأة الكبرى 🎉</h1>
+<h1>🎂 المفاجأة الأخيرة 🎂</h1>
 
 <p>
-سلومي في شيء أخير بانتظارك 💛
+هاي آخر مفاجأة إلك يا سلومي 💜✨
 </p>
 
-<video id="birthdayVideo" controls autoplay>
+
+<video controls autoplay>
 
 <source src="lv_0_20260731013714.mp4" type="video/mp4">
 
 </video>
 
+
 <p>
-🎂 كل عام وإنتِ بخير يا سلومي ❤️
+كل عام وانتي بخير يا سلومي ❤️
 </p>
+
 
 `;
 
 }
 
-</script>
 
+</script>
 
 </body>
 
 </html>
-
-
