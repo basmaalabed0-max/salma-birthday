@@ -9,7 +9,7 @@
 <style>
 body {
   margin: 0;
-  height: 100vh;
+  min-height: 100vh;
   background: linear-gradient(135deg, #050505, #2b1b3d);
   display: flex;
   justify-content: center;
@@ -36,7 +36,7 @@ p {
 }
 
 button {
-  margin-top: 25px;
+  margin-top: 20px;
   padding: 15px 35px;
   border: none;
   border-radius: 30px;
@@ -49,69 +49,243 @@ button {
 button:hover {
   transform: scale(1.05);
 }
+
+.gifts {
+ display:flex;
+ justify-content:center;
+ gap:15px;
+ margin-top:25px;
+}
+
+.gift {
+ font-size:50px;
+ cursor:pointer;
+ transition:.3s;
+}
+
+.gift:hover {
+ transform:scale(1.2);
+}
+
+img {
+ width:100%;
+ border-radius:20px;
+ margin-top:20px;
+}
+
+video {
+ width:100%;
+ border-radius:20px;
+ margin-top:20px;
+}
+
 </style>
 
 </head>
 
 <body>
 
-<div class="box">
+<div class="box" id="box">
+
 <h1>سلومي 💛</h1>
+
 <p>في مفاجأة بانتظارك ✨</p>
+
 <p>جاهزة للمتعة؟ 🎁</p>
 
 <button onclick="openGift()">افتحي المفاجأة 🎀</button>
+
 </div>
 
 
 <script>
 
-function openGift() {
-  document.querySelector(".box").innerHTML = `
-    <h1>🎉 أول مرحلة 🎉</h1>
-    <p>قبل ما توصلي للمفاجأة الكبرى...</p>
-    <p>لازم نلعب لعبة صغيرة 😏💛</p>
+function openGift(){
 
-    <button onclick="question1()">يلا نبدأ 🚀</button>
-  `;
+box.innerHTML=`
+
+<h1>🎉 أول مرحلة 🎉</h1>
+
+<p>قبل ما توصلي للمفاجأة الكبرى...</p>
+
+<p>لازم نلعب لعبة صغيرة 😏💛</p>
+
+<button onclick="question1()">يلا نبدأ 🚀</button>
+
+`;
+
 }
 
 
-function question1() {
-  document.querySelector(".box").innerHTML = `
-    <h1>❓ السؤال الأول</h1>
-    <p>مين أكثر وحدة بتحبك؟ 🤭</p>
+function question1(){
 
-    <button onclick="correct()">بسمة 😌❤️</button>
-    <br><br>
-    <button onclick="wrong()">شخص ثاني 🙄</button>
-  `;
+box.innerHTML=`
+
+<h1>❓ السؤال الأول</h1>
+
+<p>مين أكثر وحدة بتحبك؟ 🤭</p>
+
+<button onclick="correct()">بسمة 😌❤️</button>
+
+<br><br>
+
+<button onclick="wrong()">شخص ثاني 🙄</button>
+
+`;
+
 }
 
 
-function correct() {
-  document.querySelector(".box").innerHTML = `
-    <h1>😂 عرفتي الصح!</h1>
-    <p>أكيد الجواب بسمة 💛</p>
+function wrong(){
 
-    <button onclick="nextStep()">كملي ➜</button>
-  `;
+alert("غلط 😂 جربي مرة ثانية!");
+
 }
 
 
-function wrong() {
-  alert("غلط 😂 جربي مرة ثانية!");
+function correct(){
+
+box.innerHTML=`
+
+<h1>😂 عرفتي الصح!</h1>
+
+<p>أكيد الجواب بسمة 💛</p>
+
+<button onclick="giftBoxes()">كملي ➜</button>
+
+`;
+
 }
 
 
-function nextStep() {
-  document.querySelector(".box").innerHTML = `
-    <h1>🎁 ولسه المفاجآت ما خلصت...</h1>
-    <p>في أشياء أحلى بانتظارك 😍✨</p>
-  `;
+function giftBoxes(){
+
+box.innerHTML=`
+
+<h1>🎁 اختاري هديتك</h1>
+
+<p>كل بوكس فيه مفاجأة صغيرة ✨</p>
+
+<div class="gifts">
+
+<div class="gift" onclick="gift1()">🎁</div>
+
+<div class="gift" onclick="gift2()">🎁</div>
+
+<div class="gift" onclick="gift3()">🎁</div>
+
+</div>
+
+`;
+
+}
+
+
+
+
+function gift1(){
+
+box.innerHTML=`
+
+<h1>💛 هدية رقم 1</h1>
+
+<p>
+وجودك بحياتي من أجمل الأشياء، وضحكتك دايمًا بتفرق معي ✨
+</p>
+
+<button onclick="giftBoxes()">رجوع 🎁</button>
+
+`;
+
+}
+
+
+function gift2(){
+
+box.innerHTML=`
+
+<h1>🌸 هدية رقم 2</h1>
+
+<p>
+ذكرياتنا الحلوة كثير، ولسه الجاي أحلى إن شاء الله 💛
+</p>
+
+<button onclick="giftBoxes()">رجوع 🎁</button>
+
+`;
+
+}
+
+
+function gift3(){
+
+box.innerHTML=`
+
+<h1>💌 هدية رقم 3</h1>
+
+<p>
+سلومي... في رسالة خاصة إلك بانتظارك ❤️
+</p>
+
+<button onclick="message()">افتحي الرسالة 💌</button>
+
+`;
+
+}
+
+
+function message(){
+
+box.innerHTML=`
+
+<h1>💌 إلى سلومي</h1>
+
+<p>
+كل عام وإنتِ بخير يا أحلى سلومي 🎂💛
+<br><br>
+وجودك بحياتي نعمة، وإن شاء الله أيامك كلها فرح وضحكة وسعادة.
+<br><br>
+هاي المفاجأة بسيطة بس من القلب ❤️
+</p>
+
+<img src="1781566303207.png">
+
+<button onclick="finalSurprise()">المفاجأة الأخيرة ✨</button>
+
+`;
+
+}
+
+
+function finalSurprise(){
+
+box.innerHTML=`
+
+<h1>🎉 المفاجأة الكبرى 🎉</h1>
+
+<p>
+سلومي في شيء أخير بانتظارك 💛
+</p>
+
+<video id="birthdayVideo" controls autoplay>
+
+<source src="lv_0_20260731013714.mp4" type="video/mp4">
+
+</video>
+
+<p>
+🎂 كل عام وإنتِ بخير يا سلومي ❤️
+</p>
+
+`;
+
 }
 
 </script>
 
+
 </body>
+
 </html>
+
+
