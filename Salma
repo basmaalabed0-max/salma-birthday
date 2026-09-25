@@ -1,0 +1,197 @@
+const screens = [...document.querySelectorAll('.screen')];
+let current = 'intro';
+
+const envelopeMessages = [
+  'مش لازم تكوني قوية طول الوقت.',
+  'خدي وقتك… بس لا تنسي إن الأيام الثقيلة بتعدّي.',
+  'اللي راح، راح… وربنا قادر يعوّضك بشي ما خطر ببالك.',
+  'وفي حدا من بعيد، نفسه يشوف ضحكتك ترجع زي زمان. 🫂',
+  'واشتقتلك 😒 وانتي عارفة انو حياتي مش حلوة بدونك 🤔\nبكفي قلة ادب 🤌🏻 بس برضو خدي وقتك وكوني بخير 🫂'
+];
+
+const doors = [
+  {
+    title:'شو مخبّي وراه؟ 👀', icon:'🦋', cls:'one',
+    body:['ما في شي كبير… بس حبيت أخبّي هون شوية حلو إلك 🦋💜','ابتسمي 🤍']
+  },
+  {
+    title:'يمكن تلاقي شي حلو هون', icon:'✨', cls:'two',
+    body:['ياريت لو عندي القدرة إني أوصي الدنيا عليكِ إنها ما تأذيكِ أبدًا…\nياريت لو أقدر أجمع سعادة الدنيا كلها وأحطها بقلبكِ. 🤍']
+  },
+  {
+    title:'ممنوع الفضول 🤨 😂', icon:'🌸', cls:'three',
+    body:['للفضول… 🤨\nواضح إنك ماشية صح، كمّلي 😂🌸','لسه في شي مستنيكِ 🤍']
+  },
+  {
+    title:'آخر باب… يمكن 😏', icon:'🌙', cls:'four',
+    body:['وصلتي لآخر باب… 🌙\nوثقتِ في الحكاية لحد هون، فلا توقفي هسه. 🤍','جاهزة لآخر جولة؟ 🎡']
+  }
+];
+
+const wheelItems = [
+  {icon:'💌', title:'رسالة', body:'بس حبيت أذكّرك إنك أحلى وأحن حد بالكون. 🤍'},
+  {icon:'🫂', title:'طلب', body:'هسه بدّي منك تبعتيلي صورة لابتسامتك… حتى لو مصطنعة 😂🤌🏻'},
+  {icon:'🌸', title:'مهمة صغيرة', body:'قومي جيبي إشي بتحبيه وكافئي حالك فيه… بدون تأنيب ضمير 😌'},
+  {icon:'🎲', title:'اختيار غريب', body:'اختاري رقم من 1 لـ10… وما تسألي ليه 🤨😂', needsNumber:true},
+  {icon:'💜', title:'رسالة ثانية', body:'وجودك بحياتي من الأشياء اللي ما بعتبرها عادية أبدًا. 🫂'},
+  {icon:'🎲', title:'حظك اليوم', body:'حظك اليوم يقول: بكرا ألطف من اليوم… فاستني شوي 🤍'},
+  {icon:'✨', title:'أمنية', body:'تمني أمنية صغيرة إلك… وما تحكيها لحدا. 🤍'},
+  {icon:'🎁', title:'مفاجأة', body:'وصلتي لهون؟ طيب استني… لسه في شي إلك. 👀'}
+];
+
+// النتائج التفصيلية للأرقام 1–10 لم تُحسم بعد، لذلك لا نخترعها هنا.
+const numberResults = {};
+
+function showScreen(id){
+  const old = document.getElementById(current);
+  const next = document.getElementById(id);
+  if(!next || old === next) return;
+  old.classList.remove('active');
+  next.classList.add('active');
+  current = id;
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='letter') startLetter();
+}
+
+document.querySelectorAll('[data-next]').forEach(btn=>btn.addEventListener('click',()=>showScreen(btn.dataset.next)));
+
+// Stars
+const stars = document.getElementById('stars');
+for(let i=0;i<85;i++){
+  const s=document.createElement('span'); s.className='star';
+  s.style.left=Math.random()*100+'%'; s.style.top=Math.random()*100+'%';
+  s.style.setProperty('--d',(2+Math.random()*5)+'s'); s.style.animationDelay=(Math.random()*5)+'s';
+  stars.appendChild(s);
+}
+
+// Envelopes
+const envelopeGrid=document.getElementById('envelopeGrid');
+let openedEnvelopes=new Set();
+envelopeMessages.forEach((message,i)=>{
+  const card=document.createElement('button'); card.className='envelope'; card.type='button';
+  card.innerHTML=`<div class="env-shape"></div><span class="env-num">الظرف ${i+1}</span>`;
+  card.addEventListener('click',()=>{
+    openedEnvelopes.add(i); card.classList.add('opened');
+    openSimpleModal('💌',`الظرف ${i+1}`,message,'رجعيني للمغلفات');
+    if(openedEnvelopes.size===envelopeMessages.length) document.getElementById('toDoors').classList.remove('hidden');
+  });
+  envelopeGrid.appendChild(card);
+});
+document.getElementById('toDoors').addEventListener('click',()=>showScreen('doors'));
+
+// Doors
+const doorGrid=document.getElementById('doorGrid');
+const openedDoors=new Set();
+doors.forEach((door,i)=>{
+  const el=document.createElement('button'); el.type='button'; el.className='door';
+  el.innerHTML=`<span>🚪 ${i+1}<br>${door.title}</span>`;
+  el.addEventListener('click',()=>openDoor(i));
+  doorGrid.appendChild(el);
+});
+function openDoor(i){
+  openedDoors.add(i);
+  const d=doors[i];
+  document.getElementById('doorModalTitle').textContent=d.title;
+  document.getElementById('doorDecor').textContent=d.icon;
+  const body=document.getElementById('doorModalBody'); body.innerHTML='';
+  d.body.forEach((line,j)=>{
+    const p=document.createElement('p'); p.textContent=line; p.style.animation=`fade .7s ease ${j*.45}s both`; body.appendChild(p);
+  });
+  const card=document.getElementById('doorModalCard'); card.className='door-modal-card '+(i===3?'special4':'');
+  document.getElementById('doorModal').classList.add('show'); document.getElementById('doorModal').setAttribute('aria-hidden','false');
+  if(openedDoors.size===doors.length) document.getElementById('toWheel').classList.remove('hidden');
+}
+function closeDoor(){document.getElementById('doorModal').classList.remove('show');document.getElementById('doorModal').setAttribute('aria-hidden','true')}
+document.getElementById('closeDoor').onclick=closeDoor;document.getElementById('closeDoorCta').onclick=closeDoor;document.querySelector('#doorModal .modal-backdrop').onclick=closeDoor;
+document.getElementById('toWheel').addEventListener('click',()=>{closeDoor();showScreen('wheel')});
+
+// Wheel
+const wheelEl=document.getElementById('wheelEl');
+const labels=['💌','🫂','🌸','🎲','💜','🎲','✨','🎁'];
+labels.forEach((txt,i)=>{
+  const lab=document.createElement('div'); lab.className='wheel-label'; lab.textContent=txt; lab.style.transform=`rotate(${i*45+22.5}deg) translateX(-5px)`; wheelEl.appendChild(lab);
+});
+let wheelRotation=0, spinning=false;
+const spinBtn=document.getElementById('spinBtn');
+spinBtn.addEventListener('click',spinWheel);
+function spinWheel(){
+  if(spinning)return; spinning=true; spinBtn.disabled=true;
+  const index=Math.floor(Math.random()*8);
+  const segment=360/8;
+  const target=(360-(index*segment+segment/2));
+  const currentMod=((wheelRotation%360)+360)%360;
+  const delta=((target-currentMod)+360)%360;
+  wheelRotation += 360*5 + delta;
+  wheelEl.style.transform=`rotate(${wheelRotation}deg)`;
+  setTimeout(()=>{spinning=false;spinBtn.disabled=false;showWheelResult(index);},5100);
+}
+function showWheelResult(index){
+  const item=wheelItems[index];
+  document.getElementById('resultIcon').textContent=item.icon;
+  document.getElementById('resultLabel').textContent=`الخانة ${index+1}`;
+  document.getElementById('resultTitle').textContent=item.title;
+  document.getElementById('resultBody').textContent=item.body;
+  const picker=document.getElementById('numberPicker'); picker.innerHTML=''; picker.classList.toggle('hidden',!item.needsNumber);
+  if(item.needsNumber){
+    document.getElementById('resultContinue').classList.add('hidden');
+    for(let n=1;n<=10;n++){
+      const b=document.createElement('button'); b.textContent=n; b.onclick=()=>chooseNumber(n); picker.appendChild(b);
+    }
+  }else document.getElementById('resultContinue').classList.remove('hidden');
+  document.getElementById('resultModal').classList.add('show');
+}
+function chooseNumber(n){
+  const body=document.getElementById('resultBody');
+  body.textContent=numberResults[n] || `اختيارك: ${n} 🤨😂`;
+  document.getElementById('numberPicker').classList.add('hidden');
+  document.getElementById('resultContinue').classList.remove('hidden');
+}
+function closeResult(){document.getElementById('resultModal').classList.remove('show')}
+document.getElementById('resultContinue').onclick=()=>{closeResult();document.getElementById('toBreath').classList.remove('hidden')};
+document.querySelector('#resultModal .modal-backdrop').onclick=closeResult;
+document.getElementById('toBreath').addEventListener('click',()=>showScreen('breath'));
+
+// Breath -> video
+const video=document.getElementById('salmaVideo');
+document.getElementById('toVideo').addEventListener('click',()=>{showScreen('videoScreen');setTimeout(()=>{video.currentTime=0;video.play().catch(()=>{});},650)});
+video.addEventListener('ended',()=>document.getElementById('toLetter').classList.remove('hidden'));
+document.getElementById('toLetter').addEventListener('click',()=>showScreen('letter'));
+
+// Final letter
+const finalParagraphs=[
+  'إذا أصابـكِ ضـيق، سـتجدني أنا وقـلبي نتـسع لـكِ دائمـاً.. 💜🫂',
+  'أتمنى أكون قدرت ولو بشيء بسيط إني أغيرلك جو ويكون عجبك، مع إني يعني لا بقدم ولا بأخر… بس ما بحب أشوفك زعلانة.',
+  'وأنا عارفة إنو مش بإيدك الزعل، بس يعني… بعرفش أشوفك زعلانة وخلص. 🫂',
+  'ويمكن مش بعمل إشي يخليكي أحسن، وإنتِ قلتي ما بدك حد ومش جعبالك، بس برضو إنتِ مش أي حد.',
+  'وبحاول يعني إني، حتى لو مش قريبة أو عندك، يعني هو صعب… بس بحاول إني أكون وقت ما بدك. 💜',
+  'فالله يسعدك ويهون عليكي، وتضلي مطمّنة دايمًا، وربنا يحفظك بعينه اللي ما بتنام.',
+  'واستودعتك الله الذي لا تضيع ودائعه. 🙏💜'
+];
+function startLetter(){
+  const box=document.getElementById('letterText'); box.innerHTML=''; document.getElementById('letterEnd').style.animation='none';
+  finalParagraphs.forEach((text,i)=>{
+    const p=document.createElement('p'); p.textContent=text; p.style.opacity='0'; p.style.transform='translateY(7px)';
+    p.style.animation=`paragraphIn .85s ease ${0.7+i*1.05}s forwards`; box.appendChild(p);
+  });
+  const style=document.getElementById('letterParagraphStyle')||document.createElement('style'); style.id='letterParagraphStyle'; style.textContent='@keyframes paragraphIn{to{opacity:1;transform:none}}'; document.head.appendChild(style);
+  document.getElementById('letterEnd').style.animation='endIn 1s ease 8.3s forwards, heartPop 2s ease-in-out 9s infinite';
+  setTimeout(()=>document.getElementById('end').classList.add('active'),11000);
+}
+
+// Restart
+function restart(){
+  location.reload();
+}
+document.getElementById('restart').onclick=restart;
+
+// Generic modal used for envelope messages
+function openSimpleModal(icon,title,body,buttonText){
+  document.getElementById('resultIcon').textContent=icon;
+  document.getElementById('resultLabel').textContent='رسالة صغيرة إلك';
+  document.getElementById('resultTitle').textContent=title;
+  document.getElementById('resultBody').textContent=body;
+  document.getElementById('numberPicker').classList.add('hidden');
+  const btn=document.getElementById('resultContinue'); btn.textContent=buttonText; btn.classList.remove('hidden');
+  btn.onclick=()=>{closeResult();btn.textContent='يلا نكمّل 😏';btn.onclick=()=>{closeResult();document.getElementById('toBreath').classList.remove('hidden')}};
+  document.getElementById('resultModal').classList.add('show');
+}
