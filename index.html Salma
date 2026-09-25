@@ -1,3 +1,4 @@
+index.html
 const screens = [...document.querySelectorAll('.screen')];
 let current = 'intro';
 
